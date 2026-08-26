@@ -290,7 +290,7 @@
         <div class="medida-field"><label>Gemelo izquierdo contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
       </div>
       <div class="medidas-img">
-        <img src="https://raw.githubusercontent.com/EnFormaFit/enformafit-app/main/medidas_cuerpo.png" alt="Guía de medidas" onerror="this.style.display='none'">
+        <img src="https://raw.githubusercontent.com/EnFormaFit/enformafit-app/main/medidas_cuerpo.png" style="width:100%;border-radius:8px" onerror="this.parentElement.style.display='none'" alt="Guía de medidas" onerror="this.style.display='none'">
       </div>
     </div>
     <div class="nav-btns">
@@ -312,7 +312,7 @@
         <li><strong>Cuándo:</strong> por la mañana en ayunas, con el estómago vacío</li>
         <li><strong>Ropa:</strong> bañador o ropa interior — necesitamos ver el cuerpo completo</li>
         <li><strong>Fondo:</strong> pared lisa o fondo blanco, buena luz natural (junto a una ventana)</li>
-        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a la altura del esternón o boca del estómago. <strong>Nunca en la mano</strong></li>
+        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a la altura del esternón (boca del estómago). <strong>Nunca en la mano</strong></li>
         <li><strong>Truco:</strong> grábate un vídeo girando 360° y haz cuatro capturas de las posiciones</li>
         <li><strong>Posiciones:</strong> de frente, de espaldas, perfil izquierdo y perfil derecho</li>
         <li>Siempre el mismo sitio y la misma luz en cada revisión para comparar correctamente</li>
@@ -338,7 +338,7 @@
   <div class="sent" id="sentDiv">
     <div class="sent-ico">✅</div>
     <h2>¡Formulario recibido!</h2>
-    <p>Tu entrenador revisará tus datos y te enviará en breve las credenciales de acceso a la app.<br><br>Si no recibes noticias en 24h, escribe a <strong>@alvaro_casal_</strong> por Instagram.</p>
+    <p>Tu entrenador revisará tus datos y te enviará pronto las credenciales de acceso a la app.</p>
   </div>
 </div>
 
@@ -542,6 +542,10 @@ async function enviar(){
     const data=await resp.json();
     if(!resp.ok){
       btn.textContent='Enviar formulario ✓';btn.disabled=false;
+      if(data.ya_registrado){
+        btn.textContent='Enviar formulario ✓';btn.disabled=false;
+        return showErr('Este email ya está registrado. Si ya rellenaste el formulario anteriormente, tu entrenador ya tiene tus datos.');
+      }
       return showErr(data.error||'Error al enviar. Inténtalo de nuevo.');
     }
     localStorage.removeItem(KEY);
