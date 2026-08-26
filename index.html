@@ -126,7 +126,7 @@
       <div class="field">
         <label>Peso actual en ayunas (kg) <span class="req">*</span></label>
         <input type="number" id="peso" placeholder="80" step="0.1" min="40" max="250" inputmode="decimal">
-        <div class="solo-num">⚠️ Solo el número — ej: 80 o 80,5</div>
+        <div class="solo-num">⚠️ Solo el número — ej: 80 o 80.5</div>
       </div>
       <div class="field">
         <label>Altura (cm) <span class="req">*</span></label>
@@ -181,27 +181,27 @@
         <span class="pill" data-v="casa_mancuernas">Casa con mancuernas</span>
         <span class="pill" data-v="casa_bandas">Casa con bandas elásticas</span>
         <span class="pill" data-v="casa_sin">Casa sin material</span>
-        <span class="pill" data-v="otro">Mezcla o situación diferente</span>
+        <span class="pill" data-v="otro">Ninguna de las anteriores</span>
       </div>
     </div>
     <div class="field" id="materialLibreWrap" style="display:none">
-      <label>Describe exactamente qué material tienes y dónde entrenas <span class="req">*</span></label>
+      <label>Describe el material del que dispones</label>
       <input type="text" id="material_libre" placeholder="Ej: barra olímpica, discos, banco ajustable...">
     </div>
     <div class="field">
       <label>Nivel / Experiencia <span class="req">*</span></label>
       <div class="pills" id="nivelPills">
-        <span class="pill" data-v="0">Principiante (0–1 año sin parones largos)</span>
-        <span class="pill" data-v="1">Intermedio (1–3 años sin parones largos)</span>
-        <span class="pill" data-v="2">Avanzado (más de 3 años sin parones largos)</span>
+        <span class="pill" data-v="0">Principiante (0–1 año)</span>
+        <span class="pill" data-v="1">Intermedio (1–3 años)</span>
+        <span class="pill" data-v="2">Avanzado (más de 3 años)</span>
       </div>
     </div>
     <div class="field">
-      <label>¿Tienes alguna lesión o molestia que debamos tener en cuenta? <span class="req">*</span></label>
+      <label>¿Tienes alguna lesión o molestia que debamos tener en cuenta?</label>
       <input type="text" id="lesiones" placeholder="Ej: rodilla derecha, lumbar... o escribe Ninguna">
     </div>
     <div class="field">
-      <label>Ejercicios a excluir del plan (o escribe Ninguno) <span class="req">*</span></label>
+      <label>Ejercicios a excluir del plan</label>
       <input type="text" id="excluir_ejercicios" placeholder="Ej: press banca, sentadilla... o deja en blanco">
     </div>
     <div class="nav-btns">
@@ -227,15 +227,15 @@
       </div>
     </div>
     <div class="field">
-      <label>Alimentos que no puedes o no quieres comer (intolerancias, alergias, preferencias) <span class="req">*</span></label>
+      <label>Alimentos que no puedes o no quieres comer (intolerancias, alergias, preferencias)</label>
       <input type="text" id="excluir_alimentos" placeholder="Ej: marisco, lácteos, frutos secos... o deja en blanco">
     </div>
     <div class="field">
-      <label>¿Tienes alguna patología o enfermedad relevante? <span class="req">*</span></label>
+      <label>¿Tienes alguna patología o enfermedad relevante?</label>
       <textarea id="patologia" placeholder="Ej: diabetes tipo 2, hipotiroidismo... o escribe Ninguna"></textarea>
     </div>
     <div class="field">
-      <label>Fecha deseada de inicio (el lunes siguiente a rellenar este formulario) <span class="req">*</span></label>
+      <label>Fecha deseada de inicio (lunes siguiente a rellenar el formulario)</label>
       <input type="date" id="fecha_inicio">
       <div class="hint">Tu entrenador la confirmará o ajustará antes de activar el plan</div>
     </div>
@@ -243,11 +243,12 @@
       <label>¿Te parece bien que subamos alguna captura o parte de tu proceso a Instagram? Obviamente sin comprometerte personalmente <span class="req">*</span></label>
       <div class="pills" id="igPills">
         <span class="pill" data-v="si">Sí, sin problema</span>
+        <span class="pill" data-v="si_anonimo">Sí, pero sin mostrar mi cara</span>
         <span class="pill" data-v="no">Prefiero que no</span>
       </div>
     </div>
     <div class="field">
-      <label>Algo más que quieras contarme (o escribe Nada) <span class="req">*</span></label>
+      <label>Comentarios adicionales</label>
       <textarea id="comentarios" placeholder="Cualquier cosa importante que no te hayamos preguntado..."></textarea>
     </div>
     <div class="nav-btns">
@@ -276,15 +277,15 @@
     </div>
     <div class="medidas-wrap">
       <div class="medidas-campos">
-        <div class="medida-field"><label>Hombros — zona más amplia (cm)</label><input type="number" id="m_hombros" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Pecho — altura de pezones (cm)</label><input type="number" id="m_pecho" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Brazo derecho — zona más amplia (cm)</label><input type="number" id="m_brazo_d" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Brazo izquierdo — zona más amplia (cm)</label><input type="number" id="m_brazo_i" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Abdomen — altura del ombligo (cm)</label><input type="number" id="m_abdomen" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Muslo derecho — zona más amplia (cm)</label><input type="number" id="m_muslo_d" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Muslo izquierdo — zona más amplia (cm)</label><input type="number" id="m_muslo_i" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Gemelo derecho contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_d" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
-        <div class="medida-field"><label>Gemelo izquierdo contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_i" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Hombros — zona más amplia (cm)</label><input type="number" id="m_hombros" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Pecho — altura de pezones (cm)</label><input type="number" id="m_pecho" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Brazo derecho — zona más amplia (cm)</label><input type="number" id="m_brazo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Brazo izquierdo — zona más amplia (cm)</label><input type="number" id="m_brazo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Abdomen — altura del ombligo (cm)</label><input type="number" id="m_abdomen" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Muslo derecho — zona más amplia (cm)</label><input type="number" id="m_muslo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Muslo izquierdo — zona más amplia (cm)</label><input type="number" id="m_muslo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Gemelo derecho contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Gemelo izquierdo contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
       </div>
       <div class="medidas-img">
         <img src="https://raw.githubusercontent.com/EnFormaFit/enformafit-app/main/medidas_cuerpo.png" alt="Guía de medidas" onerror="this.style.display='none'">
@@ -309,7 +310,7 @@
         <li><strong>Cuándo:</strong> por la mañana en ayunas, con el estómago vacío</li>
         <li><strong>Ropa:</strong> bañador o ropa interior — necesitamos ver el cuerpo completo</li>
         <li><strong>Fondo:</strong> pared lisa o fondo blanco, buena luz natural (junto a una ventana)</li>
-        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a la altura del esternón o boca del estómago. <strong>Nunca en la mano</strong></li>
+        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a media altura (entre abdomen y pecho). <strong>Nunca en la mano</strong></li>
         <li><strong>Truco:</strong> grábate un vídeo girando 360° y haz cuatro capturas de las posiciones</li>
         <li><strong>Posiciones:</strong> de frente, de espaldas, perfil izquierdo y perfil derecho</li>
         <li>Siempre el mismo sitio y la misma luz en cada revisión para comparar correctamente</li>
@@ -471,11 +472,18 @@ function validate(step){
     if(ST.dias_entreno==null)return showErr('Selecciona los días de entrenamiento');
     if(ST.tiempo_ent==null)return showErr('Selecciona el tiempo por sesión');
     if(!ST.lugar)return showErr('Selecciona dónde entrenas');
+    if(ST.lugar==='otro'&&!v('material_libre'))return showErr('Describe el material y lugar de entrenamiento');
     if(ST.nivel==null)return showErr('Selecciona tu nivel de experiencia');
+    if(!v('lesiones'))return showErr('Indica tus lesiones o escribe Ninguna');
+    if(!v('excluir_ejercicios'))return showErr('Indica ejercicios a excluir o escribe Ninguno');
   }
   if(step===3){
     if(ST.comidas==null)return showErr('Selecciona cuántas comidas haces al día');
+    if(!v('excluir_alimentos'))return showErr('Indica alimentos excluidos o escribe Ninguno');
+    if(!v('patologia'))return showErr('Indica si tienes alguna patología o escribe Ninguna');
+    if(!v('fecha_inicio'))return showErr('Indica la fecha deseada de inicio');
     if(!ST.ig_permiso)return showErr('Indica si te parece bien que compartamos tu proceso en Instagram');
+    if(!v('comentarios'))return showErr('Escribe algo más o escribe Nada');
   }
   return true;
 }
