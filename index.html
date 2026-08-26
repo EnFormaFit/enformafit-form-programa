@@ -181,27 +181,27 @@
         <span class="pill" data-v="casa_mancuernas">Casa con mancuernas</span>
         <span class="pill" data-v="casa_bandas">Casa con bandas elásticas</span>
         <span class="pill" data-v="casa_sin">Casa sin material</span>
-        <span class="pill" data-v="otro">Ninguna de las anteriores</span>
+        <span class="pill" data-v="otro">Mezcla o situación diferente</span>
       </div>
     </div>
     <div class="field" id="materialLibreWrap" style="display:none">
-      <label>Describe el material del que dispones</label>
+      <label>Describe exactamente qué material tienes y dónde entrenas <span class="req">*</span></label>
       <input type="text" id="material_libre" placeholder="Ej: barra olímpica, discos, banco ajustable...">
     </div>
     <div class="field">
       <label>Nivel / Experiencia <span class="req">*</span></label>
       <div class="pills" id="nivelPills">
-        <span class="pill" data-v="0">Principiante (0–1 año)</span>
-        <span class="pill" data-v="1">Intermedio (1–3 años)</span>
-        <span class="pill" data-v="2">Avanzado (más de 3 años)</span>
+        <span class="pill" data-v="0">Principiante (0–1 año sin parones largos)</span>
+        <span class="pill" data-v="1">Intermedio (1–3 años sin parones largos)</span>
+        <span class="pill" data-v="2">Avanzado (más de 3 años sin parones largos)</span>
       </div>
     </div>
     <div class="field">
-      <label>¿Tienes alguna lesión o molestia que debamos tener en cuenta?</label>
+      <label>¿Tienes alguna lesión o molestia que debamos tener en cuenta? <span class="req">*</span></label>
       <input type="text" id="lesiones" placeholder="Ej: rodilla derecha, lumbar... o escribe Ninguna">
     </div>
     <div class="field">
-      <label>Ejercicios a excluir del plan</label>
+      <label>Ejercicios a excluir del plan (o escribe Ninguno) <span class="req">*</span></label>
       <input type="text" id="excluir_ejercicios" placeholder="Ej: press banca, sentadilla... o deja en blanco">
     </div>
     <div class="nav-btns">
@@ -227,15 +227,15 @@
       </div>
     </div>
     <div class="field">
-      <label>Alimentos que no puedes o no quieres comer (intolerancias, alergias, preferencias)</label>
+      <label>Alimentos que no puedes o no quieres comer (intolerancias, alergias, preferencias) <span class="req">*</span></label>
       <input type="text" id="excluir_alimentos" placeholder="Ej: marisco, lácteos, frutos secos... o deja en blanco">
     </div>
     <div class="field">
-      <label>¿Tienes alguna patología o enfermedad relevante?</label>
+      <label>¿Tienes alguna patología o enfermedad relevante? <span class="req">*</span></label>
       <textarea id="patologia" placeholder="Ej: diabetes tipo 2, hipotiroidismo... o escribe Ninguna"></textarea>
     </div>
     <div class="field">
-      <label>Fecha deseada de inicio (lunes siguiente a rellenar el formulario)</label>
+      <label>Fecha deseada de inicio (el lunes siguiente a rellenar este formulario) <span class="req">*</span></label>
       <input type="date" id="fecha_inicio">
       <div class="hint">Tu entrenador la confirmará o ajustará antes de activar el plan</div>
     </div>
@@ -247,7 +247,7 @@
       </div>
     </div>
     <div class="field">
-      <label>Comentarios adicionales</label>
+      <label>Algo más que quieras contarme (o escribe Nada) <span class="req">*</span></label>
       <textarea id="comentarios" placeholder="Cualquier cosa importante que no te hayamos preguntado..."></textarea>
     </div>
     <div class="nav-btns">
@@ -271,20 +271,20 @@
         <li>La cinta horizontal, paralela al suelo, sin apretar</li>
         <li>Para brazos y muslos: músculo relajado, zona más amplia</li>
         <li>Guíate con la imagen de referencia</li>
-        <li>Escribe <strong>solo el número</strong> — usa coma para decimales (ej: 95,5)</li>
+        <li>Escribe <strong>solo el número en cm</strong>, sin escribir "cm" ni nada más</li>
       </ul>
     </div>
     <div class="medidas-wrap">
       <div class="medidas-campos">
-        <div class="medida-field"><label>Hombros — zona más amplia (cm)</label><input type="number" id="m_hombros" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Pecho — altura de pezones (cm)</label><input type="number" id="m_pecho" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Brazo derecho — zona más amplia (cm)</label><input type="number" id="m_brazo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Brazo izquierdo — zona más amplia (cm)</label><input type="number" id="m_brazo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Abdomen — altura del ombligo (cm)</label><input type="number" id="m_abdomen" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Muslo derecho — zona más amplia (cm)</label><input type="number" id="m_muslo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Muslo izquierdo — zona más amplia (cm)</label><input type="number" id="m_muslo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Gemelo derecho contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
-        <div class="medida-field"><label>Gemelo izquierdo contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Hombros — zona más amplia (cm)</label><input type="number" id="m_hombros" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Pecho — altura de pezones (cm)</label><input type="number" id="m_pecho" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Brazo derecho — zona más amplia (cm)</label><input type="number" id="m_brazo_d" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Brazo izquierdo — zona más amplia (cm)</label><input type="number" id="m_brazo_i" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Abdomen — altura del ombligo (cm)</label><input type="number" id="m_abdomen" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Muslo derecho — zona más amplia (cm)</label><input type="number" id="m_muslo_d" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Muslo izquierdo — zona más amplia (cm)</label><input type="number" id="m_muslo_i" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Gemelo derecho contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_d" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
+        <div class="medida-field"><label>Gemelo izquierdo contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_i" placeholder="—" step="0.1" min="0" inputmode="decimal"></div>
       </div>
       <div class="medidas-img">
         <img src="https://raw.githubusercontent.com/EnFormaFit/enformafit-app/main/medidas_cuerpo.png" alt="Guía de medidas" onerror="this.style.display='none'">
@@ -309,7 +309,7 @@
         <li><strong>Cuándo:</strong> por la mañana en ayunas, con el estómago vacío</li>
         <li><strong>Ropa:</strong> bañador o ropa interior — necesitamos ver el cuerpo completo</li>
         <li><strong>Fondo:</strong> pared lisa o fondo blanco, buena luz natural (junto a una ventana)</li>
-        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a media altura (entre abdomen y pecho). <strong>Nunca en la mano</strong></li>
+        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a la altura del esternón o boca del estómago. <strong>Nunca en la mano</strong></li>
         <li><strong>Truco:</strong> grábate un vídeo girando 360° y haz cuatro capturas de las posiciones</li>
         <li><strong>Posiciones:</strong> de frente, de espaldas, perfil izquierdo y perfil derecho</li>
         <li>Siempre el mismo sitio y la misma luz en cada revisión para comparar correctamente</li>
