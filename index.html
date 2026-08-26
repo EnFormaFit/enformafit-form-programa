@@ -73,6 +73,8 @@
   .err-msg{background:#FDF0EF;border:1px solid var(--rj);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--rj);margin-bottom:14px;display:none;}
   .err-msg.show{display:block;}
   @media(max-width:400px){.grid2{grid-template-columns:1fr;}}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -126,7 +128,7 @@
       <div class="field">
         <label>Peso actual en ayunas (kg) <span class="req">*</span></label>
         <input type="number" id="peso" placeholder="80" step="0.1" min="40" max="250" inputmode="decimal">
-        <div class="solo-num">⚠️ Solo el número — ej: 80 o 80.5</div>
+        <div class="solo-num">⚠️ Solo el número — ej: 80 o 80,5</div>
       </div>
       <div class="field">
         <label>Altura (cm) <span class="req">*</span></label>
@@ -243,7 +245,7 @@
       <label>¿Te parece bien que subamos alguna captura o parte de tu proceso a Instagram? Obviamente sin comprometerte personalmente <span class="req">*</span></label>
       <div class="pills" id="igPills">
         <span class="pill" data-v="si">Sí, sin problema</span>
-        <span class="pill" data-v="si_anonimo">Sí, pero sin mostrar mi cara</span>
+        
         <span class="pill" data-v="no">Prefiero que no</span>
       </div>
     </div>
@@ -310,7 +312,7 @@
         <li><strong>Cuándo:</strong> por la mañana en ayunas, con el estómago vacío</li>
         <li><strong>Ropa:</strong> bañador o ropa interior — necesitamos ver el cuerpo completo</li>
         <li><strong>Fondo:</strong> pared lisa o fondo blanco, buena luz natural (junto a una ventana)</li>
-        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a media altura (entre abdomen y pecho). <strong>Nunca en la mano</strong></li>
+        <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a la altura del esternón o boca del estómago. <strong>Nunca en la mano</strong></li>
         <li><strong>Truco:</strong> grábate un vídeo girando 360° y haz cuatro capturas de las posiciones</li>
         <li><strong>Posiciones:</strong> de frente, de espaldas, perfil izquierdo y perfil derecho</li>
         <li>Siempre el mismo sitio y la misma luz en cada revisión para comparar correctamente</li>
@@ -490,9 +492,9 @@ function validate(step){
 
 function goTo(n){
   if(!validate(ST.step))return;
-  document.getElementById('step'+ST.step).classList.remove('active');
+  for(let i=1;i<=TOTAL;i++){const el=document.getElementById('step'+i);if(el)el.classList.remove('active');}
   ST.step=n;save();
-  document.getElementById('step'+n).classList.add('active');
+  const nextEl=document.getElementById('step'+n);if(nextEl)nextEl.classList.add('active');
   document.getElementById('progFill').style.width=(n/TOTAL*100)+'%';
   document.getElementById('progLabel').textContent=`Paso ${n} de ${TOTAL} — ${LABELS[n]}`;
   window.scrollTo({top:0,behavior:'smooth'});
