@@ -107,7 +107,7 @@
       <div class="hint">Aquí recibirás el acceso a la app</div>
     </div>
     <div class="field">
-      <label>Teléfono</label>
+      <label>Teléfono <span class="req">*</span></label>
       <input type="tel" id="telefono" placeholder="612 345 678" autocomplete="tel">
     </div>
     <div class="grid2">
@@ -199,7 +199,7 @@
       </div>
     </div>
     <div class="field">
-      <label>¿Tienes alguna lesión o molestia que debamos tener en cuenta?</label>
+      <label>¿Tienes alguna lesión o molestia? (escribe Ninguna si no hay) <span class="req">*</span></label>
       <input type="text" id="lesiones" placeholder="Ej: rodilla derecha, lumbar... o escribe Ninguna">
     </div>
     <div class="field">
@@ -229,11 +229,11 @@
       </div>
     </div>
     <div class="field">
-      <label>Alimentos que no puedes o no quieres comer (intolerancias, alergias, preferencias)</label>
+      <label>Alimentos a excluir (intolerancias, alergias, preferencias o escribe Ninguno) <span class="req">*</span></label>
       <input type="text" id="excluir_alimentos" placeholder="Ej: marisco, lácteos, frutos secos... o deja en blanco">
     </div>
     <div class="field">
-      <label>¿Tienes alguna patología o enfermedad relevante?</label>
+      <label>¿Tienes alguna patología o enfermedad relevante? (escribe Ninguna si no hay) <span class="req">*</span></label>
       <textarea id="patologia" placeholder="Ej: diabetes tipo 2, hipotiroidismo... o escribe Ninguna"></textarea>
     </div>
     <div class="field">
@@ -478,6 +478,7 @@ function validate(step){
     if(ST.nivel==null)return showErr('Selecciona tu nivel de experiencia');
     if(!v('lesiones'))return showErr('Indica tus lesiones o escribe Ninguna');
     if(!v('excluir_ejercicios'))return showErr('Indica ejercicios a excluir o escribe Ninguno');
+    if(!v('telefono'))return showErr('El teléfono es obligatorio');
   }
   if(step===3){
     if(ST.comidas==null)return showErr('Selecciona cuántas comidas haces al día');
