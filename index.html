@@ -3,159 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EnFormaFit — Formulario de Inicio</title>
+<title>EnFormaFit — Formulario de Inicio · Programa</title>
 <style>
-  :root {
-    --az: #1A2B5A;
-    --vd: #1D9E75;
-    --bg: #F8F9FC;
-    --bor: #E2E6EF;
-    --t1: #1A1A2E;
-    --t2: #4A5568;
-    --t3: #9199AD;
-    --rj: #E74C3C;
-    --nr: #E67E22;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--t1); min-height: 100vh; }
-
-  .header { background: var(--az); padding: 20px 16px 24px; text-align: center; }
-  .header img { height: 44px; margin-bottom: 10px; }
-  .header h1 { color: #fff; font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-  .header p { color: rgba(255,255,255,0.75); font-size: 13px; }
-
-  .progress-wrap { background: #fff; border-bottom: 1px solid var(--bor); padding: 12px 16px; position: sticky; top: 0; z-index: 10; }
-  .progress-bar { height: 4px; background: var(--bor); border-radius: 2px; overflow: hidden; margin-bottom: 6px; }
-  .progress-fill { height: 100%; background: var(--vd); border-radius: 2px; transition: width 0.4s ease; }
-  .progress-label { font-size: 11px; font-weight: 700; color: var(--t3); text-transform: uppercase; letter-spacing: 0.5px; }
-
-  .container { max-width: 600px; margin: 0 auto; padding: 16px; }
-
-  .step { display: none; }
-  .step.active { display: block; }
-
-  .step-header { margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--bor); }
-  .step-num { font-size: 11px; font-weight: 700; color: var(--vd); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-  .step-title { font-size: 20px; font-weight: 800; color: var(--az); }
-  .step-sub { font-size: 13px; color: var(--t2); margin-top: 4px; }
-
-  .field { margin-bottom: 18px; }
-  .field label { display: block; font-size: 13px; font-weight: 700; color: var(--t2); margin-bottom: 6px; }
-  .field label .req { color: var(--rj); margin-left: 2px; }
-  .field input, .field select, .field textarea {
-    width: 100%; border: 1.5px solid var(--bor); border-radius: 10px;
-    padding: 11px 14px; font-size: 15px; font-family: inherit; color: var(--t1);
-    background: #fff; outline: none; transition: border-color 0.2s;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--az); }
-  .field input.error, .field select.error, .field textarea.error { border-color: var(--rj); }
-  .field textarea { resize: vertical; min-height: 80px; }
-  .field .hint { font-size: 12px; color: var(--t3); margin-top: 5px; }
-
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
-  .pill { padding: 8px 14px; border: 1.5px solid var(--bor); border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--t2); cursor: pointer; transition: all 0.15s; background: #fff; }
-  .pill.on { border-color: var(--az); background: var(--az); color: #fff; }
-
-  /* Fotos */
-  .foto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-  .foto-slot {
-    aspect-ratio: 3/4; border: 2px dashed var(--bor); border-radius: 12px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    cursor: pointer; background: #fff; transition: all 0.2s; position: relative; overflow: hidden;
-  }
-  .foto-slot:hover { border-color: var(--az); background: #F0F4FF; }
-  .foto-slot.done { border-style: solid; border-color: var(--vd); }
-  .foto-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; }
-  .foto-slot .lbl { font-size: 12px; font-weight: 700; color: var(--t3); margin-top: 6px; text-align: center; padding: 0 8px; }
-  .foto-slot .ico { font-size: 28px; }
-  .foto-slot .check { position: absolute; top: 6px; right: 6px; background: var(--vd); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 700; }
-  .foto-slot .del { position: absolute; top: 6px; left: 6px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; cursor: pointer; z-index: 2; }
-
-  .instrucciones { background: #EEF3FA; border-radius: 10px; padding: 14px; margin-bottom: 16px; }
-  .instrucciones h4 { font-size: 13px; font-weight: 700; color: var(--az); margin-bottom: 8px; }
-  .instrucciones ul { padding-left: 16px; }
-  .instrucciones li { font-size: 13px; color: var(--t2); margin-bottom: 4px; line-height: 1.4; }
-
-  /* Medidas */
-  .medidas-wrap { display: flex; gap: 14px; align-items: flex-start; }
-  .medidas-campos { flex: 1; }
-  .medidas-img { width: 90px; flex-shrink: 0; }
-  .medidas-img img { width: 100%; border-radius: 8px; }
-  .medida-field { margin-bottom: 10px; }
-  .medida-field label { font-size: 12px; font-weight: 700; color: var(--t2); display: block; margin-bottom: 3px; }
-  .medida-field input { width: 100%; border: 1.5px solid var(--bor); border-radius: 8px; padding: 9px 12px; font-size: 14px; font-family: inherit; color: var(--az); font-weight: 700; outline: none; }
-  .medida-field input:focus { border-color: var(--az); }
-
-  /* Navegación */
-  .nav-btns { display: flex; gap: 10px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--bor); }
-  .btn { padding: 13px 20px; border-radius: 10px; font-size: 15px; font-weight: 700; border: none; cursor: pointer; flex: 1; transition: all 0.15s; font-family: inherit; }
-  .btn-back { background: #fff; border: 1.5px solid var(--bor); color: var(--t2); }
-  .btn-back:hover { border-color: var(--az); color: var(--az); }
-  .btn-next { background: var(--az); color: #fff; }
-  .btn-next:hover { background: #142248; }
-  .btn-next:disabled { background: var(--bor); color: var(--t3); cursor: not-allowed; }
-  .btn-submit { background: var(--vd); color: #fff; }
-  .btn-submit:hover { background: #17865f; }
-
-  .skip-note { font-size: 12px; color: var(--t3); text-align: center; margin-top: 10px; }
-
-  /* RGPD */
-  .rgpd { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; }
-  .rgpd input[type=checkbox] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--az); cursor: pointer; }
-  .rgpd label { font-size: 12px; color: var(--t2); line-height: 1.5; cursor: pointer; }
-  .rgpd a { color: var(--az); }
-
-  /* Estado enviado */
-  .sent { display: none; text-align: center; padding: 40px 20px; }
-  .sent.show { display: block; }
-  .sent-ico { font-size: 56px; margin-bottom: 16px; }
-  .sent h2 { font-size: 22px; font-weight: 800; color: var(--az); margin-bottom: 8px; }
-  .sent p { font-size: 14px; color: var(--t2); line-height: 1.6; }
-
-  /* Error general */
-  .err-msg { background: #FDF0EF; border: 1px solid var(--rj); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--rj); margin-bottom: 14px; display: none; }
-  .err-msg.show { display: block; }
-
-  .save-badge { font-size: 11px; color: var(--vd); font-weight: 700; display: none; }
-  .save-badge.show { display: inline; }
-
-  @media (max-width: 400px) { .grid2 { grid-template-columns: 1fr; } }
+  :root{--az:#1A2B5A;--vd:#1D9E75;--bg:#F8F9FC;--bor:#E2E6EF;--t1:#1A1A2E;--t2:#4A5568;--t3:#9199AD;--rj:#E74C3C;--nr:#E67E22;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--t1);min-height:100vh;}
+  .header{background:var(--az);padding:20px 16px 24px;text-align:center;}
+  .header img{height:44px;margin-bottom:10px;}
+  .header h1{color:#fff;font-size:20px;font-weight:800;margin-bottom:4px;}
+  .header p{color:rgba(255,255,255,0.75);font-size:13px;}
+  .progress-wrap{background:#fff;border-bottom:1px solid var(--bor);padding:12px 16px;position:sticky;top:0;z-index:10;}
+  .progress-bar{height:4px;background:var(--bor);border-radius:2px;overflow:hidden;margin-bottom:6px;}
+  .progress-fill{height:100%;background:var(--vd);border-radius:2px;transition:width 0.4s ease;}
+  .progress-label{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;}
+  .container{max-width:600px;margin:0 auto;padding:16px;}
+  .step{display:none;}.step.active{display:block;}
+  .step-header{margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--bor);}
+  .step-num{font-size:11px;font-weight:700;color:var(--vd);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+  .step-title{font-size:20px;font-weight:800;color:var(--az);}
+  .step-sub{font-size:13px;color:var(--t2);margin-top:4px;line-height:1.5;}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:13px;font-weight:700;color:var(--t2);margin-bottom:6px;}
+  .field label .req{color:var(--rj);margin-left:2px;}
+  .field input,.field select,.field textarea{width:100%;border:1.5px solid var(--bor);border-radius:10px;padding:11px 14px;font-size:15px;font-family:inherit;color:var(--t1);background:#fff;outline:none;transition:border-color 0.2s;}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--az);}
+  .field textarea{resize:vertical;min-height:80px;}
+  .field .hint{font-size:12px;color:var(--t3);margin-top:5px;}
+  .field .solo-num{font-size:12px;color:var(--nr);font-weight:700;margin-top:4px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{padding:8px 14px;border:1.5px solid var(--bor);border-radius:20px;font-size:13px;font-weight:600;color:var(--t2);cursor:pointer;transition:all 0.15s;background:#fff;user-select:none;}
+  .pill.on{border-color:var(--az);background:var(--az);color:#fff;}
+  .foto-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .foto-slot{aspect-ratio:3/4;border:2px dashed var(--bor);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;background:#fff;transition:all 0.2s;position:relative;overflow:hidden;}
+  .foto-slot:hover{border-color:var(--az);}
+  .foto-slot.done{border-style:solid;border-color:var(--vd);}
+  .foto-slot img{width:100%;height:100%;object-fit:cover;position:absolute;}
+  .foto-slot .lbl{font-size:12px;font-weight:700;color:var(--t3);margin-top:6px;text-align:center;padding:0 8px;}
+  .foto-slot .ico{font-size:28px;}
+  .foto-slot .check{position:absolute;top:6px;right:6px;background:var(--vd);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;}
+  .foto-slot .del{position:absolute;top:6px;left:6px;background:rgba(0,0,0,0.5);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;cursor:pointer;z-index:2;}
+  .instrucciones{background:#EEF3FA;border-radius:10px;padding:14px;margin-bottom:16px;}
+  .instrucciones h4{font-size:13px;font-weight:700;color:var(--az);margin-bottom:8px;}
+  .instrucciones ul{padding-left:16px;}
+  .instrucciones li{font-size:13px;color:var(--t2);margin-bottom:5px;line-height:1.4;}
+  .save-note{background:#E6F6F1;border-radius:8px;padding:10px 14px;font-size:12px;color:#0F5C3A;font-weight:600;margin-bottom:14px;text-align:center;}
+  .medidas-wrap{display:flex;gap:14px;align-items:flex-start;}
+  .medidas-campos{flex:1;}
+  .medidas-img{width:90px;flex-shrink:0;}
+  .medidas-img img{width:100%;border-radius:8px;}
+  .medida-field{margin-bottom:10px;}
+  .medida-field label{font-size:12px;font-weight:700;color:var(--t2);display:block;margin-bottom:3px;}
+  .medida-field input{width:100%;border:1.5px solid var(--bor);border-radius:8px;padding:9px 12px;font-size:14px;font-family:inherit;color:var(--az);font-weight:700;outline:none;}
+  .medida-field input:focus{border-color:var(--az);}
+  .nav-btns{display:flex;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid var(--bor);}
+  .btn{padding:13px 20px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;flex:1;transition:all 0.15s;font-family:inherit;}
+  .btn-back{background:#fff;border:1.5px solid var(--bor);color:var(--t2);}
+  .btn-next{background:var(--az);color:#fff;}
+  .btn-submit{background:var(--vd);color:#fff;}
+  .rgpd{display:flex;gap:10px;align-items:flex-start;margin-top:16px;}
+  .rgpd input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--az);}
+  .rgpd label{font-size:12px;color:var(--t2);line-height:1.5;}
+  .rgpd a{color:var(--az);}
+  .sent{display:none;text-align:center;padding:40px 20px;}
+  .sent.show{display:block;}
+  .sent-ico{font-size:56px;margin-bottom:16px;}
+  .sent h2{font-size:22px;font-weight:800;color:var(--az);margin-bottom:8px;}
+  .sent p{font-size:14px;color:var(--t2);line-height:1.6;}
+  .err-msg{background:#FDF0EF;border:1px solid var(--rj);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--rj);margin-bottom:14px;display:none;}
+  .err-msg.show{display:block;}
+  @media(max-width:400px){.grid2{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-
 <div class="header">
   <img src="https://raw.githubusercontent.com/EnFormaFit/enformafit-app/main/logo.png" alt="EnFormaFit" onerror="this.style.display='none'">
   <h1>Formulario de inicio</h1>
-  <p>Programa EnFormaFit — rellénalo con calma, guarda el progreso</p>
+  <p>Programa EnFormaFit · Tus respuestas se guardan automáticamente</p>
 </div>
-
 <div class="progress-wrap">
   <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:20%"></div></div>
   <div class="progress-label" id="progLabel">Paso 1 de 5 — Datos personales</div>
 </div>
-
 <div class="container">
   <div class="err-msg" id="errMsg"></div>
 
-  <!-- ═══ STEP 1: Datos personales ═══ -->
+  <!-- ═══ PASO 1: Datos personales ═══ -->
   <div class="step active" id="step1">
     <div class="step-header">
       <div class="step-num">Paso 1 de 5</div>
       <div class="step-title">Datos personales</div>
-      <div class="step-sub">Solo tardas unos minutos. Puedes guardar y continuar más tarde.</div>
+      <div class="step-sub">💾 Tus respuestas se guardan automáticamente. Si no tienes las fotos o medidas ahora, puedes volver más tarde sin perder nada.</div>
     </div>
-
     <div class="field">
-      <label>Nombre completo <span class="req">*</span></label>
-      <input type="text" id="nombre" placeholder="Nombre y apellidos" autocomplete="name">
+      <label>Nombre y apellidos <span class="req">*</span></label>
+      <input type="text" id="nombre" autocomplete="name" placeholder="Nombre completo">
     </div>
     <div class="field">
       <label>Email <span class="req">*</span></label>
       <input type="email" id="email" placeholder="tu@email.com" autocomplete="email">
-      <div class="hint">Aquí recibirás tus credenciales de acceso a la app</div>
+      <div class="hint">Aquí recibirás el acceso a la app</div>
+    </div>
+    <div class="field">
+      <label>Teléfono</label>
+      <input type="tel" id="telefono" placeholder="612 345 678" autocomplete="tel">
     </div>
     <div class="grid2">
       <div class="field">
@@ -173,12 +124,14 @@
     </div>
     <div class="grid2">
       <div class="field">
-        <label>Peso actual (kg) <span class="req">*</span></label>
-        <input type="number" id="peso" placeholder="80" step="0.1" min="40" max="250">
+        <label>Peso actual en ayunas (kg) <span class="req">*</span></label>
+        <input type="number" id="peso" placeholder="80" step="0.1" min="40" max="250" inputmode="decimal">
+        <div class="solo-num">⚠️ Solo el número — ej: 80 o 80.5</div>
       </div>
       <div class="field">
         <label>Altura (cm) <span class="req">*</span></label>
-        <input type="number" id="altura" placeholder="175" min="140" max="220">
+        <input type="number" id="altura" placeholder="175" min="140" max="220" inputmode="numeric">
+        <div class="solo-num">⚠️ Solo el número — ej: 175</div>
       </div>
     </div>
     <div class="field">
@@ -191,19 +144,17 @@
         <option value="1.725">Muy activo — trabajo físico intenso</option>
       </select>
     </div>
-
     <div class="nav-btns">
       <button class="btn btn-next" onclick="goTo(2)">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 2: Entrenamiento ═══ -->
+  <!-- ═══ PASO 2: Entrenamiento ═══ -->
   <div class="step" id="step2">
     <div class="step-header">
       <div class="step-num">Paso 2 de 5</div>
       <div class="step-title">Entrenamiento</div>
     </div>
-
     <div class="field">
       <label>Días de entrenamiento a la semana <span class="req">*</span></label>
       <div class="pills" id="diasPills">
@@ -224,21 +175,25 @@
       </div>
     </div>
     <div class="field">
-      <label>Lugar y material de entrenamiento <span class="req">*</span></label>
+      <label>¿Dónde y con qué entrenas? <span class="req">*</span></label>
       <div class="pills" id="lugarPills">
         <span class="pill" data-v="gym">Gimnasio completo</span>
         <span class="pill" data-v="casa_mancuernas">Casa con mancuernas</span>
-        <span class="pill" data-v="casa_bandas">Casa con bandas</span>
+        <span class="pill" data-v="casa_bandas">Casa con bandas elásticas</span>
         <span class="pill" data-v="casa_sin">Casa sin material</span>
-        <span class="pill" data-v="mixto">Mixto gym + casa</span>
+        <span class="pill" data-v="otro">Ninguna de las anteriores</span>
       </div>
+    </div>
+    <div class="field" id="materialLibreWrap" style="display:none">
+      <label>Describe el material del que dispones</label>
+      <input type="text" id="material_libre" placeholder="Ej: barra olímpica, discos, banco ajustable...">
     </div>
     <div class="field">
       <label>Nivel / Experiencia <span class="req">*</span></label>
       <div class="pills" id="nivelPills">
         <span class="pill" data-v="0">Principiante (0–1 año)</span>
         <span class="pill" data-v="1">Intermedio (1–3 años)</span>
-        <span class="pill" data-v="2">Avanzado (+3 años)</span>
+        <span class="pill" data-v="2">Avanzado (más de 3 años)</span>
       </div>
     </div>
     <div class="field">
@@ -247,22 +202,20 @@
     </div>
     <div class="field">
       <label>Ejercicios a excluir del plan</label>
-      <input type="text" id="excluir_ejercicios" placeholder="Ej: sentadilla, press banca... o deja en blanco">
+      <input type="text" id="excluir_ejercicios" placeholder="Ej: press banca, sentadilla... o deja en blanco">
     </div>
-
     <div class="nav-btns">
       <button class="btn btn-back" onclick="goTo(1)">← Atrás</button>
       <button class="btn btn-next" onclick="goTo(3)">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 3: Nutrición ═══ -->
+  <!-- ═══ PASO 3: Nutrición ═══ -->
   <div class="step" id="step3">
     <div class="step-header">
       <div class="step-num">Paso 3 de 5</div>
-      <div class="step-title">Nutrición</div>
+      <div class="step-title">Nutrición y salud</div>
     </div>
-
     <div class="field">
       <label>Número de comidas al día <span class="req">*</span></label>
       <div class="pills" id="comidasPills">
@@ -274,397 +227,325 @@
       </div>
     </div>
     <div class="field">
-      <label>Alimentos que no puedes o no quieres comer</label>
+      <label>Alimentos que no puedes o no quieres comer (intolerancias, alergias, preferencias)</label>
       <input type="text" id="excluir_alimentos" placeholder="Ej: marisco, lácteos, frutos secos... o deja en blanco">
-      <div class="hint">Incluye intolerancias, alergias o preferencias</div>
     </div>
     <div class="field">
       <label>¿Tienes alguna patología o enfermedad relevante?</label>
       <textarea id="patologia" placeholder="Ej: diabetes tipo 2, hipotiroidismo... o escribe Ninguna"></textarea>
     </div>
     <div class="field">
-      <label>Fecha deseada de inicio del programa</label>
+      <label>Fecha deseada de inicio (lunes siguiente a rellenar el formulario)</label>
       <input type="date" id="fecha_inicio">
       <div class="hint">Tu entrenador la confirmará o ajustará antes de activar el plan</div>
     </div>
     <div class="field">
-      <label>Comentarios adicionales</label>
-      <textarea id="comentarios" placeholder="Cualquier cosa que consideres importante y que no te hayamos preguntado..."></textarea>
+      <label>¿Te parece bien que subamos alguna captura o parte de tu proceso a Instagram? Obviamente sin comprometerte personalmente <span class="req">*</span></label>
+      <div class="pills" id="igPills">
+        <span class="pill" data-v="si">Sí, sin problema</span>
+        <span class="pill" data-v="si_anonimo">Sí, pero sin mostrar mi cara</span>
+        <span class="pill" data-v="no">Prefiero que no</span>
+      </div>
     </div>
-
+    <div class="field">
+      <label>Comentarios adicionales</label>
+      <textarea id="comentarios" placeholder="Cualquier cosa importante que no te hayamos preguntado..."></textarea>
+    </div>
     <div class="nav-btns">
       <button class="btn btn-back" onclick="goTo(2)">← Atrás</button>
       <button class="btn btn-next" onclick="goTo(4)">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 4: Medidas corporales ═══ -->
+  <!-- ═══ PASO 4: Medidas corporales ═══ -->
   <div class="step" id="step4">
     <div class="step-header">
       <div class="step-num">Paso 4 de 5</div>
       <div class="step-title">Medidas corporales</div>
-      <div class="step-sub">Si no tienes cinta métrica ahora, guarda y vuelve mañana. No se perderán tus datos.</div>
+      <div class="step-sub">💾 Si no tienes la cinta métrica ahora, continúa al siguiente paso. Tus datos quedan guardados y puedes volver en otro momento sin perder nada.</div>
     </div>
-
     <div class="instrucciones">
       <h4>📏 Cómo tomarte las medidas</h4>
       <ul>
-        <li>Mídete por la mañana en ayunas, sin ropa</li>
-        <li>Usa una cinta métrica de coser (o cualquier cinta flexible)</li>
-        <li>La cinta debe estar horizontal y sin apretar demasiado</li>
-        <li>Para brazos y muslos, mide en la zona más amplia con el músculo relajado</li>
-        <li>Guíate con la imagen para saber exactamente dónde medir</li>
+        <li>Por la mañana en ayunas, sin ropa</li>
+        <li>Usa una cinta métrica flexible (de coser)</li>
+        <li>La cinta horizontal, paralela al suelo, sin apretar</li>
+        <li>Para brazos y muslos: músculo relajado, zona más amplia</li>
+        <li>Guíate con la imagen de referencia</li>
+        <li>Escribe <strong>solo el número en cm</strong>, sin escribir "cm" ni nada más</li>
       </ul>
     </div>
-
     <div class="medidas-wrap">
       <div class="medidas-campos">
-        <div class="medida-field"><label>Hombros — zona más amplia (cm)</label><input type="number" id="m_hombros" placeholder="—" step="0.1"></div>
-        <div class="medida-field"><label>Pecho — altura de pezones (cm)</label><input type="number" id="m_pecho" placeholder="—" step="0.1"></div>
-        <div class="medida-field"><label>Brazo derecho — zona más amplia (cm)</label><input type="number" id="m_brazo_d" placeholder="—" step="0.1"></div>
-        <div class="medida-field"><label>Brazo izquierdo — zona más amplia (cm)</label><input type="number" id="m_brazo_i" placeholder="—" step="0.1"></div>
-        <div class="medida-field"><label>Abdomen — altura del ombligo (cm)</label><input type="number" id="m_abdomen" placeholder="—" step="0.1"></div>
-        <div class="medida-field"><label>Muslo derecho — zona más amplia (cm)</label><input type="number" id="m_muslo_d" placeholder="—" step="0.1"></div>
-        <div class="medida-field"><label>Muslo izquierdo — zona más amplia (cm)</label><input type="number" id="m_muslo_i" placeholder="—" step="0.1"></div>
+        <div class="medida-field"><label>Hombros — zona más amplia (cm)</label><input type="number" id="m_hombros" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Pecho — altura de pezones (cm)</label><input type="number" id="m_pecho" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Brazo derecho — zona más amplia (cm)</label><input type="number" id="m_brazo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Brazo izquierdo — zona más amplia (cm)</label><input type="number" id="m_brazo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Abdomen — altura del ombligo (cm)</label><input type="number" id="m_abdomen" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Muslo derecho — zona más amplia (cm)</label><input type="number" id="m_muslo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Muslo izquierdo — zona más amplia (cm)</label><input type="number" id="m_muslo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Gemelo derecho contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_d" placeholder="—" step="0.1" inputmode="decimal"></div>
+        <div class="medida-field"><label>Gemelo izquierdo contraído — zona más amplia (cm)</label><input type="number" id="m_gemelo_i" placeholder="—" step="0.1" inputmode="decimal"></div>
       </div>
       <div class="medidas-img">
         <img src="https://raw.githubusercontent.com/EnFormaFit/enformafit-app/main/medidas_cuerpo.png" alt="Guía de medidas" onerror="this.style.display='none'">
       </div>
     </div>
-    <p class="skip-note">Las medidas son opcionales ahora. Puedes guardar el formulario y añadirlas más tarde.</p>
-
     <div class="nav-btns">
       <button class="btn btn-back" onclick="goTo(3)">← Atrás</button>
       <button class="btn btn-next" onclick="goTo(5)">Siguiente →</button>
     </div>
   </div>
 
-  <!-- ═══ STEP 5: Fotos ═══ -->
+  <!-- ═══ PASO 5: Fotos ═══ -->
   <div class="step" id="step5">
     <div class="step-header">
       <div class="step-num">Paso 5 de 5</div>
       <div class="step-title">Fotos de inicio</div>
-      <div class="step-sub">Son la referencia para ver tu evolución. Si no las tienes ahora, envía el formulario y manda las fotos mañana.</div>
+      <div class="step-sub">💾 Si no puedes tomarte las fotos ahora, rellena el resto y envía el formulario. Tus datos quedan guardados y no perderás nada.</div>
     </div>
-
     <div class="instrucciones">
       <h4>📸 Cómo tomarte las fotos</h4>
       <ul>
-        <li><strong>Momento:</strong> por la mañana en ayunas, con el estómago vacío</li>
+        <li><strong>Cuándo:</strong> por la mañana en ayunas, con el estómago vacío</li>
         <li><strong>Ropa:</strong> bañador o ropa interior — necesitamos ver el cuerpo completo</li>
-        <li><strong>Fondo:</strong> pared lisa o fondo blanco, buena luz (cerca de una ventana)</li>
+        <li><strong>Fondo:</strong> pared lisa o fondo blanco, buena luz natural (junto a una ventana)</li>
         <li><strong>Cámara:</strong> apoyada en una superficie o con temporizador, a media altura (entre abdomen y pecho). <strong>Nunca en la mano</strong></li>
-        <li><strong>Truco:</strong> puedes grabarte un vídeo girando 360° y hacer cuatro capturas de las posiciones</li>
-        <li><strong>Posiciones:</strong> de frente, de espaldas y los dos perfiles (izquierdo y derecho)</li>
-        <li>Usaremos siempre el mismo sitio y la misma luz para que la comparación sea real</li>
+        <li><strong>Truco:</strong> grábate un vídeo girando 360° y haz cuatro capturas de las posiciones</li>
+        <li><strong>Posiciones:</strong> de frente, de espaldas, perfil izquierdo y perfil derecho</li>
+        <li>Siempre el mismo sitio y la misma luz en cada revisión para comparar correctamente</li>
       </ul>
     </div>
-
     <div class="foto-grid">
-      <div class="foto-slot" id="fslot_0" onclick="triggerFoto(0)">
-        <div class="ico">📷</div>
-        <div class="lbl">Frente</div>
-      </div>
-      <div class="foto-slot" id="fslot_1" onclick="triggerFoto(1)">
-        <div class="ico">📷</div>
-        <div class="lbl">Espalda</div>
-      </div>
-      <div class="foto-slot" id="fslot_2" onclick="triggerFoto(2)">
-        <div class="ico">📷</div>
-        <div class="lbl">Perfil izquierdo</div>
-      </div>
-      <div class="foto-slot" id="fslot_3" onclick="triggerFoto(3)">
-        <div class="ico">📷</div>
-        <div class="lbl">Perfil derecho</div>
-      </div>
+      <div class="foto-slot" id="fslot_0" onclick="triggerFoto(0)"><div class="ico">📷</div><div class="lbl">Frente</div></div>
+      <div class="foto-slot" id="fslot_1" onclick="triggerFoto(1)"><div class="ico">📷</div><div class="lbl">Espalda</div></div>
+      <div class="foto-slot" id="fslot_2" onclick="triggerFoto(2)"><div class="ico">📷</div><div class="lbl">Perfil izquierdo</div></div>
+      <div class="foto-slot" id="fslot_3" onclick="triggerFoto(3)"><div class="ico">📷</div><div class="lbl">Perfil derecho</div></div>
     </div>
     <input type="file" accept="image/*" id="fotoInput" style="display:none" onchange="loadFoto(this)">
-
     <div class="rgpd">
       <input type="checkbox" id="rgpd">
-      <label for="rgpd">Acepto la <a href="#" onclick="return false">política de privacidad</a> y autorizo el tratamiento de mis datos personales y fotografías con fines de seguimiento de mi transformación física. Los datos no se compartirán con terceros.</label>
+      <label for="rgpd">Acepto la <a href="#" onclick="return false">política de privacidad</a> y autorizo el tratamiento de mis datos personales y fotografías con fines exclusivos de seguimiento de mi transformación física. Los datos no se compartirán con terceros.</label>
     </div>
-
-    <p class="skip-note" style="margin-top:8px">Las fotos son opcionales en este momento. El formulario se enviará igualmente.</p>
-
     <div class="nav-btns">
       <button class="btn btn-back" onclick="goTo(4)">← Atrás</button>
       <button class="btn btn-submit" id="btnSubmit" onclick="enviar()">Enviar formulario ✓</button>
     </div>
   </div>
 
-  <!-- Enviado -->
   <div class="sent" id="sentDiv">
     <div class="sent-ico">✅</div>
     <h2>¡Formulario recibido!</h2>
-    <p>Tu entrenador revisará tus datos y te enviará en breve las credenciales para acceder a la app.<br><br>
-    Si no recibiste confirmación en 24h, escribe a <strong>@alvaro_casal_</strong> por Instagram.</p>
+    <p>Tu entrenador revisará tus datos y te enviará en breve las credenciales de acceso a la app.<br><br>Si no recibes noticias en 24h, escribe a <strong>@alvaro_casal_</strong> por Instagram.</p>
   </div>
 </div>
 
 <script>
-const BACKEND = 'https://enformafit-backend-production.up.railway.app';
-const STORAGE_KEY = 'ef_form_programa_v1';
+const BACKEND='https://enformafit-backend-production.up.railway.app';
+const KEY='ef_prog_v2';
+const TOTAL=5;
+const LABELS=['','Datos personales','Entrenamiento','Nutrición y salud','Medidas corporales','Fotos de inicio'];
 
-// ─── Estado ───────────────────────────────────────────────────────────────────
-let ST = {
-  step: 1,
-  nombre: '', email: '', fecha_nac: '', objetivo: '', peso: '', altura: '', actividad: '',
-  dias_entreno: null, tiempo_ent: null, lugar: null, nivel: null,
-  lesiones: '', excluir_ejercicios: '',
-  comidas: null, excluir_alimentos: '', patologia: '', fecha_inicio: '', comentarios: '',
-  medidas: {},
-  fotos: [null, null, null, null], // base64
+let ST={
+  step:1,nombre:'',email:'',telefono:'',fecha_nac:'',objetivo:'',peso:'',altura:'',actividad:'',
+  dias_entreno:null,tiempo_ent:null,lugar:null,material_libre:'',nivel:null,
+  lesiones:'',excluir_ejercicios:'',
+  comidas:null,excluir_alimentos:'',patologia:'',fecha_inicio:'',ig_permiso:null,comentarios:'',
+  medidas:{},fotos:[null,null,null,null],
 };
+let fotoIdx=0;
 
-let fotoIdx = 0;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST));}catch(e){}}
 
-// ─── Persistencia local ───────────────────────────────────────────────────────
-function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(ST)); } catch(e) {}
-}
-function load() {
-  try {
-    const d = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    Object.assign(ST, d);
-    // Restaurar campos
-    const fields = ['nombre','email','fecha_nac','objetivo','peso','altura','actividad',
-      'lesiones','excluir_ejercicios','excluir_alimentos','patologia','fecha_inicio','comentarios'];
-    const ids =    ['nombre','email','fecha_nac','objetivo','peso','altura','actividad',
-      'lesiones','excluir_ejercicios','excluir_alimentos','patologia','fecha_inicio','comentarios'];
-    fields.forEach((f,i) => { const el = document.getElementById(ids[i]); if(el && ST[f]) el.value = ST[f]; });
+function load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KEY)||'{}');
+    if(!d.nombre)return; // nothing saved
+    Object.assign(ST,d);
+    const map={nombre:'nombre',email:'email',telefono:'telefono',fecha_nac:'fecha_nac',
+      objetivo:'objetivo',actividad:'actividad',lesiones:'lesiones',
+      excluir_ejercicios:'excluir_ejercicios',excluir_alimentos:'excluir_alimentos',
+      patologia:'patologia',fecha_inicio:'fecha_inicio',comentarios:'comentarios',
+      material_libre:'material_libre'};
+    Object.entries(map).forEach(([id,k])=>{const el=document.getElementById(id);if(el&&ST[k])el.value=ST[k];});
+    // Numbers
+    ['peso','altura'].forEach(id=>{const el=document.getElementById(id);if(el&&ST[id])el.value=ST[id];});
     // Pills
-    if (ST.dias_entreno) selectPill('diasPills', ST.dias_entreno);
-    if (ST.tiempo_ent) selectPill('tiempoPills', ST.tiempo_ent);
-    if (ST.lugar) selectPill('lugarPills', ST.lugar);
-    if (ST.nivel !== null && ST.nivel !== undefined) selectPill('nivelPills', ST.nivel);
-    if (ST.comidas) selectPill('comidasPills', ST.comidas);
+    if(ST.dias_entreno!=null)selPill('diasPills',ST.dias_entreno);
+    if(ST.tiempo_ent!=null)selPill('tiempoPills',ST.tiempo_ent);
+    if(ST.lugar)selPill('lugarPills',ST.lugar);
+    if(ST.nivel!=null)selPill('nivelPills',ST.nivel);
+    if(ST.comidas!=null)selPill('comidasPills',ST.comidas);
+    if(ST.ig_permiso)selPill('igPills',ST.ig_permiso);
+    if(ST.lugar==='otro')document.getElementById('materialLibreWrap').style.display='block';
     // Medidas
-    Object.entries(ST.medidas || {}).forEach(([k,v]) => {
-      const el = document.getElementById('m_' + k);
-      if (el) el.value = v;
-    });
+    Object.entries(ST.medidas||{}).forEach(([k,v])=>{const el=document.getElementById('m_'+k);if(el)el.value=v;});
     // Fotos
-    (ST.fotos || []).forEach((f, i) => { if (f) renderFoto(i, f); });
-  } catch(e) {}
+    (ST.fotos||[]).forEach((f,i)=>{if(f)renderFoto(i,f);});
+  }catch(e){}
 }
 
-// ─── Pills ────────────────────────────────────────────────────────────────────
-function initPills() {
-  document.querySelectorAll('.pills').forEach(container => {
-    container.querySelectorAll('.pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        container.querySelectorAll('.pill').forEach(p => p.classList.remove('on'));
+function selPill(cid,val){
+  const c=document.getElementById(cid);if(!c)return;
+  c.querySelectorAll('.pill').forEach(p=>p.classList.toggle('on',p.dataset.v==val));
+}
+
+function initPills(){
+  document.querySelectorAll('.pills').forEach(container=>{
+    container.querySelectorAll('.pill').forEach(pill=>{
+      pill.addEventListener('click',()=>{
+        container.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
         pill.classList.add('on');
-        const key = container.id.replace('Pills','');
-        const val = pill.dataset.v;
-        if (key === 'dias') { ST.dias_entreno = parseInt(val); }
-        else if (key === 'tiempo') { ST.tiempo_ent = parseInt(val); }
-        else if (key === 'lugar') { ST.lugar = val; }
-        else if (key === 'nivel') { ST.nivel = parseInt(val); }
-        else if (key === 'comidas') { ST.comidas = parseInt(val); }
+        const key=container.id.replace('Pills','');
+        const val=pill.dataset.v;
+        if(key==='dias'){ST.dias_entreno=parseInt(val);}
+        else if(key==='tiempo'){ST.tiempo_ent=parseInt(val);}
+        else if(key==='lugar'){
+          ST.lugar=val;
+          document.getElementById('materialLibreWrap').style.display=val==='otro'?'block':'none';
+        }
+        else if(key==='nivel'){ST.nivel=parseInt(val);}
+        else if(key==='comidas'){ST.comidas=parseInt(val);}
+        else if(key==='ig'){ST.ig_permiso=val;}
         save();
       });
     });
   });
 }
-function selectPill(containerId, val) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.querySelectorAll('.pill').forEach(p => {
-    p.classList.toggle('on', p.dataset.v == val);
-  });
-}
 
-// ─── Auto-save en inputs ──────────────────────────────────────────────────────
-function initInputSave() {
-  const map = {nombre:'nombre', email:'email', fecha_nac:'fecha_nac', objetivo:'objetivo',
-    peso:'peso', altura:'altura', actividad:'actividad', lesiones:'lesiones',
-    excluir_ejercicios:'excluir_ejercicios', excluir_alimentos:'excluir_alimentos',
-    patologia:'patologia', fecha_inicio:'fecha_inicio', comentarios:'comentarios'};
-  Object.entries(map).forEach(([id, key]) => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', () => { ST[key] = el.value; save(); });
+function initInputs(){
+  const textMap={nombre:'nombre',email:'email',telefono:'telefono',fecha_nac:'fecha_nac',
+    objetivo:'objetivo',actividad:'actividad',lesiones:'lesiones',excluir_ejercicios:'excluir_ejercicios',
+    excluir_alimentos:'excluir_alimentos',patologia:'patologia',fecha_inicio:'fecha_inicio',
+    comentarios:'comentarios',material_libre:'material_libre',peso:'peso',altura:'altura'};
+  Object.entries(textMap).forEach(([id,k])=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('input',()=>{ST[k]=el.value;save();});
   });
   // Medidas
-  ['hombros','pecho','brazo_d','brazo_i','abdomen','muslo_d','muslo_i'].forEach(m => {
-    const el = document.getElementById('m_' + m);
-    if (el) el.addEventListener('input', () => {
-      if (el.value) ST.medidas[m] = parseFloat(el.value);
-      else delete ST.medidas[m];
-      save();
+  ['hombros','pecho','brazo_d','brazo_i','abdomen','muslo_d','muslo_i','gemelo_d','gemelo_i'].forEach(m=>{
+    const el=document.getElementById('m_'+m);
+    if(el)el.addEventListener('input',()=>{
+      if(el.value)ST.medidas[m]=parseFloat(el.value);else delete ST.medidas[m];save();
     });
   });
 }
 
-// ─── Fotos ────────────────────────────────────────────────────────────────────
-function triggerFoto(idx) { fotoIdx = idx; document.getElementById('fotoInput').click(); }
-function loadFoto(inp) {
-  const f = inp.files[0]; if (!f) return;
-  const r = new FileReader();
-  r.onload = e => { ST.fotos[fotoIdx] = e.target.result; save(); renderFoto(fotoIdx, e.target.result); };
-  r.readAsDataURL(f);
-  inp.value = '';
+function triggerFoto(idx){fotoIdx=idx;document.getElementById('fotoInput').click();}
+function loadFoto(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{ST.fotos[fotoIdx]=e.target.result;save();renderFoto(fotoIdx,e.target.result);};
+  r.readAsDataURL(f);inp.value='';
 }
-function renderFoto(idx, src) {
-  const slot = document.getElementById('fslot_' + idx);
-  if (!slot) return;
-  const labels = ['Frente', 'Espalda', 'Perfil izquierdo', 'Perfil derecho'];
-  slot.innerHTML = `<img src="${src}" alt="${labels[idx]}">
-    <div class="check">✓</div>
-    <div class="del" onclick="event.stopPropagation();delFoto(${idx})">✕</div>`;
-  slot.classList.add('done');
-  slot.onclick = () => triggerFoto(idx);
+function renderFoto(idx,src){
+  const labels=['Frente','Espalda','Perfil izquierdo','Perfil derecho'];
+  const slot=document.getElementById('fslot_'+idx);if(!slot)return;
+  slot.innerHTML=`<img src="${src}" alt="${labels[idx]}"><div class="check">✓</div><div class="del" onclick="event.stopPropagation();delFoto(${idx})">✕</div>`;
+  slot.classList.add('done');slot.onclick=()=>triggerFoto(idx);
 }
-function delFoto(idx) {
-  ST.fotos[idx] = null; save();
-  const labels = ['Frente', 'Espalda', 'Perfil izquierdo', 'Perfil derecho'];
-  const slot = document.getElementById('fslot_' + idx);
+function delFoto(idx){
+  ST.fotos[idx]=null;save();
+  const labels=['Frente','Espalda','Perfil izquierdo','Perfil derecho'];
+  const slot=document.getElementById('fslot_'+idx);
   slot.classList.remove('done');
-  slot.innerHTML = `<div class="ico">📷</div><div class="lbl">${labels[idx]}</div>`;
-  slot.onclick = () => triggerFoto(idx);
+  slot.innerHTML=`<div class="ico">📷</div><div class="lbl">${labels[idx]}</div>`;
+  slot.onclick=()=>triggerFoto(idx);
 }
 
-// ─── Navegación entre pasos ───────────────────────────────────────────────────
-const STEP_LABELS = ['', 'Datos personales', 'Entrenamiento', 'Nutrición', 'Medidas corporales', 'Fotos de inicio'];
-function goTo(n) {
-  if (!validate(ST.step)) return;
-  document.getElementById('step' + ST.step).classList.remove('active');
-  ST.step = n;
-  save();
-  document.getElementById('step' + n).classList.add('active');
-  document.getElementById('progFill').style.width = (n / 5 * 100) + '%';
-  document.getElementById('progLabel').textContent = `Paso ${n} de 5 — ${STEP_LABELS[n]}`;
-  window.scrollTo(0, 0);
-  hideErr();
-}
+function v(id){return(document.getElementById(id)?.value||'').trim();}
+function showErr(msg){const el=document.getElementById('errMsg');el.textContent=msg;el.classList.add('show');window.scrollTo({top:0,behavior:'smooth'});return false;}
+function hideErr(){document.getElementById('errMsg').classList.remove('show');}
 
-function validate(step) {
+function validate(step){
   hideErr();
-  if (step === 1) {
-    if (!v('nombre')) return showErr('El nombre es obligatorio');
-    if (!v('email') || !v('email').includes('@')) return showErr('Introduce un email válido');
-    if (!v('fecha_nac')) return showErr('La fecha de nacimiento es obligatoria');
-    if (!v('objetivo')) return showErr('Selecciona tu objetivo');
-    if (!v('peso')) return showErr('Introduce tu peso actual');
-    if (!v('altura')) return showErr('Introduce tu altura');
-    if (!v('actividad')) return showErr('Selecciona tu nivel de actividad diaria');
+  if(step===1){
+    if(!v('nombre'))return showErr('El nombre es obligatorio');
+    if(!v('email')||!v('email').includes('@'))return showErr('Introduce un email válido');
+    if(!v('fecha_nac'))return showErr('La fecha de nacimiento es obligatoria');
+    if(!v('objetivo'))return showErr('Selecciona tu objetivo principal');
+    if(!v('peso')||isNaN(parseFloat(v('peso'))))return showErr('Introduce tu peso en kg (solo el número)');
+    if(!v('altura')||isNaN(parseFloat(v('altura'))))return showErr('Introduce tu altura en cm (solo el número)');
+    if(!v('actividad'))return showErr('Selecciona tu nivel de actividad diaria');
   }
-  if (step === 2) {
-    if (!ST.dias_entreno) return showErr('Selecciona los días de entrenamiento');
-    if (!ST.tiempo_ent) return showErr('Selecciona el tiempo por sesión');
-    if (!ST.lugar) return showErr('Selecciona dónde entrenas');
-    if (ST.nivel === null || ST.nivel === undefined) return showErr('Selecciona tu nivel de experiencia');
+  if(step===2){
+    if(ST.dias_entreno==null)return showErr('Selecciona los días de entrenamiento');
+    if(ST.tiempo_ent==null)return showErr('Selecciona el tiempo por sesión');
+    if(!ST.lugar)return showErr('Selecciona dónde entrenas');
+    if(ST.nivel==null)return showErr('Selecciona tu nivel de experiencia');
   }
-  if (step === 3) {
-    if (!ST.comidas) return showErr('Selecciona cuántas comidas haces al día');
+  if(step===3){
+    if(ST.comidas==null)return showErr('Selecciona cuántas comidas haces al día');
+    if(!ST.ig_permiso)return showErr('Indica si te parece bien que compartamos tu proceso en Instagram');
   }
   return true;
 }
 
-function v(id) { return (document.getElementById(id)?.value || '').trim(); }
-function showErr(msg) {
-  const el = document.getElementById('errMsg');
-  el.textContent = msg; el.classList.add('show');
-  window.scrollTo(0, 0); return false;
+function goTo(n){
+  if(!validate(ST.step))return;
+  document.getElementById('step'+ST.step).classList.remove('active');
+  ST.step=n;save();
+  document.getElementById('step'+n).classList.add('active');
+  document.getElementById('progFill').style.width=(n/TOTAL*100)+'%';
+  document.getElementById('progLabel').textContent=`Paso ${n} de ${TOTAL} — ${LABELS[n]}`;
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-function hideErr() { document.getElementById('errMsg').classList.remove('show'); }
 
-// ─── Envío ────────────────────────────────────────────────────────────────────
-async function enviar() {
-  if (!document.getElementById('rgpd').checked) {
-    return showErr('Debes aceptar la política de privacidad para continuar');
-  }
+async function comprimirFoto(b64){
+  return new Promise(resolve=>{
+    const img=new Image();
+    img.onload=()=>{
+      const MAX=800;let w=img.width,h=img.height;
+      if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;}}
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);resolve(c.toDataURL('image/jpeg',0.75));
+    };
+    img.onerror=()=>resolve(null);img.src=b64;
+  });
+}
 
-  const btn = document.getElementById('btnSubmit');
-  btn.textContent = 'Enviando...';
-  btn.disabled = true;
-  hideErr();
-
-  // Comprimir fotos si las hay (redimensionar a max 800px)
-  const fotosComprimidas = await Promise.all(
-    ST.fotos.map(f => f ? comprimirFoto(f) : null)
-  );
-
-  const body = {
-    nombre: v('nombre'),
-    email: v('email'),
-    tipo: 'programa',
-    fecha_nacimiento: v('fecha_nac'),
-    objetivo: v('objetivo'),
-    peso: parseFloat(v('peso')),
-    altura: parseFloat(v('altura')),
-    actividad: parseFloat(v('actividad')),
-    comidas: ST.comidas || 3,
-    dias_entreno: ST.dias_entreno || 3,
-    lugar: ST.lugar || 'gym',
-    tiempo_ent: ST.tiempo_ent || 45,
-    nivel: ST.nivel ?? 1,
-    lesiones: v('lesiones') || null,
-    excluir_alimentos: v('excluir_alimentos') ? v('excluir_alimentos').split(',').map(s=>s.trim()).filter(Boolean) : [],
-    patologia: v('patologia') || null,
-    fecha_inicio_deseada: v('fecha_inicio') || null,
-    comentarios: v('comentarios') || null,
-    medidas_s0: Object.keys(ST.medidas).length ? ST.medidas : null,
-    fotos_s0_b64: fotosComprimidas.filter(Boolean).length ? fotosComprimidas : null,
-    rgpd: true,
+async function enviar(){
+  if(!validate(5))return;
+  if(!document.getElementById('rgpd').checked)return showErr('Debes aceptar la política de privacidad para continuar');
+  const btn=document.getElementById('btnSubmit');
+  btn.textContent='Enviando...';btn.disabled=true;
+  const fotosC=await Promise.all(ST.fotos.map(f=>f?comprimirFoto(f):Promise.resolve(null)));
+  const body={
+    nombre:v('nombre'),email:v('email'),tipo:'programa',
+    fecha_nacimiento:v('fecha_nac'),
+    objetivo:v('objetivo'),peso:parseFloat(v('peso')),altura:parseFloat(v('altura')),
+    actividad:parseFloat(v('actividad')),
+    comidas:ST.comidas||3,dias_entreno:ST.dias_entreno||3,
+    lugar:ST.lugar||'gym',tiempo_ent:ST.tiempo_ent||45,nivel:ST.nivel??1,
+    lesiones:v('lesiones')||null,
+    excluir_alimentos:v('excluir_alimentos')?v('excluir_alimentos').split(',').map(s=>s.trim()).filter(Boolean):[],
+    patologia:v('patologia')||null,
+    fecha_inicio_deseada:v('fecha_inicio')||null,
+    comentarios:v('comentarios')||null,
+    material_libre:v('material_libre')||null,
+    ig_permiso:ST.ig_permiso||null,
+    medidas_s0:Object.keys(ST.medidas).length?ST.medidas:null,
+    fotos_s0_b64:fotosC.filter(Boolean).length?fotosC:null,
+    rgpd:true,
   };
-
-  try {
-    const resp = await fetch(`${BACKEND}/api/clientes/publico`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    const data = await resp.json();
-
-    if (!resp.ok) {
-      btn.textContent = 'Enviar formulario ✓';
-      btn.disabled = false;
-      return showErr(data.error || 'Error al enviar. Inténtalo de nuevo.');
+  try{
+    const resp=await fetch(`${BACKEND}/api/clientes/publico`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const data=await resp.json();
+    if(!resp.ok){
+      btn.textContent='Enviar formulario ✓';btn.disabled=false;
+      return showErr(data.error||'Error al enviar. Inténtalo de nuevo.');
     }
-
-    // Limpiar estado local
-    localStorage.removeItem(STORAGE_KEY);
-
-    // Mostrar confirmación
-    document.getElementById('step5').style.display = 'none';
+    localStorage.removeItem(KEY);
+    document.getElementById('step5').style.display='none';
     document.getElementById('sentDiv').classList.add('show');
-    window.scrollTo(0, 0);
-
-  } catch(e) {
-    btn.textContent = 'Enviar formulario ✓';
-    btn.disabled = false;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){
+    btn.textContent='Enviar formulario ✓';btn.disabled=false;
     showErr('Error de conexión. Comprueba tu internet e inténtalo de nuevo.');
   }
 }
 
-async function comprimirFoto(base64) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = () => {
-      const MAX = 800;
-      let w = img.width, h = img.height;
-      if (w > MAX || h > MAX) {
-        if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
-        else { w = Math.round(w * MAX / h); h = MAX; }
-      }
-      const canvas = document.createElement('canvas');
-      canvas.width = w; canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      resolve(canvas.toDataURL('image/jpeg', 0.75));
-    };
-    img.onerror = () => resolve(null);
-    img.src = base64;
-  });
-}
-
-// ─── Init ─────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  initPills();
-  initInputSave();
-  load();
-});
+document.addEventListener('DOMContentLoaded',()=>{initPills();initInputs();load();});
 </script>
 </body>
 </html>
