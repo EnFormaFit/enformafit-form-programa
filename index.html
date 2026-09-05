@@ -539,6 +539,16 @@ function validate(step){
     if(!ST.ig_permiso)return showErr('Indica si te parece bien que compartamos tu proceso en Instagram');
     if(!v('comentarios'))return showErr('Escribe algo más o escribe Nada');
   }
+  if(step===4){
+    var medFields=['m_hombros','m_pecho','m_brazo_d','m_brazo_i','m_abdomen','m_muslo_d','m_muslo_i','m_gemelo_d','m_gemelo_i'];
+    var medNames=['hombros','pecho','brazo derecho','brazo izquierdo','abdomen','muslo derecho','muslo izquierdo','gemelo derecho','gemelo izquierdo'];
+    for(var mi=0;mi<medFields.length;mi++){
+      if(!v(medFields[mi])||isNaN(parseFloat(v(medFields[mi]))))return showErr('Introduce la medida de '+medNames[mi]+' en cm');
+    }
+  }
+  if(step===5){
+    if(!fotosC||fotosC.filter(Boolean).length<4)return showErr('Sube las 4 fotos obligatorias: frente, perfil derecho, perfil izquierdo y espalda');
+  }
   return true;
 }
 
