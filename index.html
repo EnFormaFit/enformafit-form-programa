@@ -547,7 +547,7 @@ function validate(step){
     }
   }
   if(step===5){
-    if(!fotosC||fotosC.filter(Boolean).length<4)return showErr('Sube las 4 fotos obligatorias: frente, perfil derecho, perfil izquierdo y espalda');
+    if(!ST.fotos||ST.fotos.filter(Boolean).length<4)return showErr('Sube las 4 fotos obligatorias: frente, perfil derecho, perfil izquierdo y espalda');
   }
   return true;
 }
