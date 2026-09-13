@@ -346,7 +346,16 @@
 
 <script>
 const BACKEND='https://enformafit-backend-production.up.railway.app';
-const KEY='ef_prog_v2';
+const KEY='ef_prog_v3';
+(function(){
+  try{
+    var old=localStorage.getItem('ef_prog_v2');
+    if(old&&!localStorage.getItem('ef_prog_v3')){
+      var d=JSON.parse(old);d.step=1;
+      localStorage.setItem('ef_prog_v3',JSON.stringify(d));
+    }
+  }catch(e){}
+})();
 const TOTAL=5;
 const LABELS=['','Datos personales','Entrenamiento','Nutrición y salud','Medidas corporales','Fotos de inicio'];
 
@@ -366,6 +375,7 @@ function load(){
     const d=JSON.parse(localStorage.getItem(KEY)||'{}');
     if(!d.nombre)return; // nothing saved
     Object.assign(ST,d);
+    ST.step=1;
     const map={nombre:'nombre',email:'email',telefono:'telefono',fecha_nac:'fecha_nac',
       objetivo:'objetivo',actividad:'actividad',lesiones:'lesiones',
       excluir_ejercicios:'excluir_ejercicios',excluir_alimentos:'excluir_alimentos',
