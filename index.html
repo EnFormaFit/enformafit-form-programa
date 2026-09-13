@@ -589,8 +589,9 @@ async function enviar(){
   if(!validate(5))return;
   if(!document.getElementById('rgpd').checked)return showErr('Debes aceptar la política de privacidad para continuar');
   const btn=document.getElementById('btnSubmit');
-  btn.textContent='Enviando...';btn.disabled=true;
+  btn.textContent='Preparando fotos... 📸';btn.disabled=true;btn.style.opacity='0.7';
   const fotosC=await Promise.all(ST.fotos.map(f=>f?comprimirFoto(f):Promise.resolve(null)));
+  btn.textContent='Enviando tu cuestionario... ⏳';
   const body={
     nombre:v('nombre'),email:v('email'),tipo:'programa',
     fecha_nacimiento:v('fecha_nac'),
@@ -616,7 +617,7 @@ async function enviar(){
       btn.textContent='Enviar formulario ✓';btn.disabled=false;
       if(data.ya_registrado){
         btn.textContent='Enviar formulario ✓';btn.disabled=false;
-        return showErr('Este email ya está registrado. Si ya rellenaste el formulario anteriormente, tu entrenador ya tiene tus datos.');
+        return showErr('Este email ya está registrado. Tu entrenador ya tiene tus datos — no hace falta que lo rellenes de nuevo. Escríbele directamente.');
       }
       return showErr(data.error||'Error al enviar. Inténtalo de nuevo.');
     }
@@ -626,7 +627,7 @@ async function enviar(){
     window.scrollTo({top:0,behavior:'smooth'});
   }catch(e){
     btn.textContent='Enviar formulario ✓';btn.disabled=false;
-    showErr('Error de conexión. Comprueba tu internet e inténtalo de nuevo.');
+    showErr('Error de conexión. Comprueba tu internet y vuelve a pulsar Enviar — tus respuestas siguen guardadas.');
   }
 }
 
