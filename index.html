@@ -563,7 +563,7 @@ function validate(step){
 }
 
 function goTo(n){
-  if(!validate(ST.step))return;
+  if(n > ST.step && !validate(ST.step))return; // Only validate when going forward
   for(let i=1;i<=TOTAL;i++){const el=document.getElementById('step'+i);if(el)el.classList.remove('active');}
   ST.step=n;save();
   const nextEl=document.getElementById('step'+n);if(nextEl)nextEl.classList.add('active');
